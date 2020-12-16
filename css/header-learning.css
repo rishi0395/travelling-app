@@ -1,0 +1,248 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+*,
+*::after,
+*::before {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: inherit;
+}
+
+html {
+  /* we also have to change the html px to % because users cannot change if we hard coded this here */
+  /* 0.625*16px = 10px */
+  /* font-size: 10px; */
+  font-size: 62.5%;
+}
+
+/* for a better practice and more responsive website always use relative dimensions to define the property */
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  /* 3rem = 3*10=30px => 10 comes from root element i.e html*/
+  box-sizing: border-box;
+}
+
+/*
+border-box - padding or margin will no longer added to the total w*h that we specify for the box
+
+every thing related to font we always defined into the body
+
+line-height means it will multiply if not defined
+*/
+
+.header {
+  height: 95vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.8),
+      rgba(40, 180, 133, 0.8)
+    ),
+    url('../img/hero.jpg');
+  background-size: cover;
+  background-position: top;
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+}
+
+/*
+    95vh- it means every time the height will be always 95% of the view port height
+
+    background-position: sets the position of the image means here if I change the window size top remain fixed
+
+    to define background gradient we always use background-image image property to define that
+
+    clip-path: specify coordinate of a polygon in which the image is visible
+*/
+
+.header__logo-box {
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+
+.header__logo {
+  height: 3.5rem;
+}
+
+/*animation can be used during on hover also*/
+/* .logo:hover {
+  animation: moveInRight 1s ease-out;
+} */
+
+.header__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/*
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%); % starts form the border for the div
+*/
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+
+  /* determines to set back side of the div*/
+  backface-visibility: hidden;
+  margin-bottom: 6rem;
+}
+
+.heading-primary--main {
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+
+  /*use the animation defined below*/
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+
+  /* how animation starts like ease-out animation starts fast and ends slow*/
+  animation-timing-function: ease-out;
+
+  /*animation simply applies 3 times
+    animation-iteration-count: 3;
+  */
+
+  /* animation starts after reload
+   animation-delay: 3s;
+  */
+}
+
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1.75rem;
+  animation: moveInRight 1s ease-out;
+}
+
+@keyframes moveInLeft {
+  /*animation starts*/
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+
+  /* 60% {
+    transform: rotate(180deg);
+  } */
+
+  80% {
+    transform: translateX(1rem);
+  }
+
+  /*animation ends*/
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInRight {
+  /*animation starts*/
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+
+  80% {
+    transform: translateX(-1rem);
+  }
+
+  /*animation ends*/
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInButton {
+  /*animation starts*/
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  /*animation ends*/
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/*sudo class */
+.btn:link,
+btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all 0.2s;
+  position: relative;
+  font-size: 1.6rem;
+}
+
+.btn:hover {
+  transform: translateY(-0.3rem);
+  /*x y blur color*/
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--white {
+  background-color: #fff;
+  color: #777;
+}
+
+/* suedo elements */
+.btn::after {
+  /* content and display mandatory property to display sudo property*/
+  content: '';
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn--white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn--animated {
+  animation: moveInButton 0.5s ease-out 0.75s;
+  /* animation starts when all the animation done */
+  animation-fill-mode: backwards;
+}

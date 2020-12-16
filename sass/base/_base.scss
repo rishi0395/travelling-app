@@ -1,0 +1,52 @@
+// partial base file
+*,
+*::after,
+*::before {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: inherit;
+}
+
+html {
+  /* we also have to change the html px to % because users cannot change if we hard coded this here */
+  /* 0.625*16px = 10px = 1rem */
+  /* font-size: 10px; */
+  font-size: 62.5%; //1rem = 10px : 10px/16px = 62.5%
+
+  // @include respond(phone) {
+  //   font-size: 50%; // 1rem = 8px; 8/16px = 50%
+  // }
+
+  @include respond(tab-land) {
+    //width<1200px
+    font-size: 56.25%; //1rem = 9px; 9/16 ; 56.25
+  }
+
+  @include respond(tab-port) {
+    //width<900
+    font-size: 50%; // 1rem = 8px; 8/16px = 50%
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; //1rem = 12px ; 12/16 = 75%
+  }
+}
+
+/* for a better practice and more responsive website always use relative dimensions to define the property */
+
+body {
+  box-sizing: border-box;
+
+  padding: 3rem;
+  /* 3rem = 3*10=30px => 10 comes from root element i.e html*/
+
+  @include respond(tab-port) {
+    //width<900
+    padding: 0;
+  }
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}
